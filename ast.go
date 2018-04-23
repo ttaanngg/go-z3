@@ -95,6 +95,44 @@ func (c *Context) False() *AST {
 	}
 }
 
+// RealSeq returns the seq type number.
+func (c *Context) RealSet(reals ...float64) *AST {
+	set := &AST{
+		rawCtx: c.raw,
+		rawAST: C.Z3_mk_empty_set(
+			c.raw,
+			c.RealSort().rawSort,
+		),
+	}
+	for _, content := range reals {
+		C.Z3_mk_set_add(
+			c.raw,
+			set.rawAST,
+			c.Float(content).rawAST,
+		)
+	}
+	return set
+}
+
+// StringSeqSort returns the seq type string.
+func (c *Context) StringSet(strings ...string) *AST {
+	set := &AST{
+		rawCtx: c.raw,
+		rawAST: C.Z3_mk_empty_set(
+			c.raw,
+			c.StringSort().rawSort,
+		),
+	}
+	for _, content := range strings {
+		C.Z3_mk_set_add(
+			c.raw,
+			set.rawAST,
+			c.Str(content).rawAST,
+		)
+	}
+	return set
+}
+
 //-------------------------------------------------------------------
 // Value Readers
 //-------------------------------------------------------------------

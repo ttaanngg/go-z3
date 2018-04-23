@@ -7,6 +7,17 @@ import (
 // #include "go-z3.h"
 import "C"
 
+func (a *AST) NotContain(arg *AST) *AST {
+	return a.Contain(arg).Not()
+}
+
+func (a *AST) Contain(arg *AST) *AST {
+	return &AST{
+		rawAST: C.Z3_mk_set_member(a.rawCtx, arg.rawAST, a.rawAST),
+		rawCtx: a.rawCtx,
+	}
+}
+
 // Add creates an AST node representing adding.
 //
 // All AST values must be part of the same context.

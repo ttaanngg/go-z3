@@ -41,3 +41,13 @@ func (c *Context) StringSort() *Sort {
 	}
 }
 
+// SeqSort returns the seq type.
+func (c *Context) SeqSort(sort Sort) *Sort{
+	return &Sort{
+		rawCtx:  c.raw,
+		rawSort: C.Z3_mk_seq_sort(c.raw, sort.rawSort),
+	}
+}
+
+
+
