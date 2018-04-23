@@ -34,7 +34,7 @@ func (m *Model) String() string {
 // Maps: Z3_model_eval
 func (m *Model) Eval(c *AST) *AST {
 	var result C.Z3_ast
-	if C.Z3_model_eval(m.rawCtx, m.rawModel, c.rawAST, C.Z3_TRUE, &result) != C.Z3_TRUE {
+	if C.Z3_model_eval(m.rawCtx, m.rawModel, c.rawAST, true, &result) != true {
 		return nil
 	}
 

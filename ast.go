@@ -53,6 +53,28 @@ func (c *Context) Int(v int, typ *Sort) *AST {
 	}
 }
 
+// Float creates an float type.
+//
+// Maps: Z3_mk_real
+func (c *Context) Float(v float64) *AST {
+	//TODO: test if this could work
+	return &AST{
+		rawCtx: c.raw,
+		rawAST: C.Z3_mk_real(c.raw, C.int(v), C.int(1)),
+	}
+}
+
+// Str creates an string type.
+//
+// Maps: Z3_mk_string
+func (c *Context) Str(str string) *AST {
+	//TODO: test if this could work
+	return &AST{
+		rawCtx: c.raw,
+		rawAST: C.Z3_mk_string(c.raw, C.CString(str)),
+	}
+}
+
 // True creates the value "true".
 //
 // Maps: Z3_mk_true

@@ -17,6 +17,14 @@ func (c *Context) BoolSort() *Sort {
 	}
 }
 
+// RealSort returns the boolean type.
+func (c *Context) RealSort() *Sort {
+	return &Sort{
+		rawCtx:  c.raw,
+		rawSort: C.Z3_mk_real_sort(c.raw),
+	}
+}
+
 // IntSort returns the int type.
 func (c *Context) IntSort() *Sort {
 	return &Sort{
@@ -24,3 +32,12 @@ func (c *Context) IntSort() *Sort {
 		rawSort: C.Z3_mk_int_sort(c.raw),
 	}
 }
+
+// StringSort returns the int type.
+func (c *Context) StringSort() *Sort {
+	return &Sort{
+		rawCtx:  c.raw,
+		rawSort: C.Z3_mk_string_sort(c.raw),
+	}
+}
+
